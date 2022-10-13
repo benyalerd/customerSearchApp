@@ -1,0 +1,47 @@
+.div-center{
+    justify-content: center;
+    display: flex;
+  }
+
+.div-bg-singup{
+    background-color:#cc4d76;
+    width:100%;
+    padding:40px 0px;
+}
+
+.div-singup{
+    background-color:#e8e7e3;
+    width:400px;
+    height:100%;
+    border-radius: 20px;
+    padding: 0px 30px;
+    align-items: center;
+    display: flex;
+}
+
+.text-title-pink{
+    text-align: center;
+    font-size: 35px;
+    font-weight: 900;
+    color:#e6bd6f;
+}
+
+.input{
+    border-radius: 25px;
+    box-shadow: 0 0 5pt 0.5pt #d3d3d3;
+    margin: 20px 0px;
+    height: 45px;
+    padding:20px;
+}
+
+.primary-button{
+    background-color:#cc4d76;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+    color:#e6bd6f;
+    width: 340px;
+    height: 45px;
+    border-radius: 30px;
+    cursor:pointer;
+}
