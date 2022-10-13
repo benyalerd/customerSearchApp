@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{Component,Suspense} from 'react';
+import { connect } from 'react-redux';
+import {Route,Switch,Redirect} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Login = React.lazy(() => import("./pages/LogIn"));
+const Register = React.lazy(() => import("./pages/Register"));
+
+class App extends Component{
+  displayName = "Search Customer";
+
+  render(){
+    const height = window.innerHeight;
+    return(
+    <Suspense fallback={
+     <div></div>
+    }>
+      <Switch>
+        <Route exact path="/" component={Login}/>
+        <Route path="/Register" component={Register}/>
+        <Redirect to="/"/>
+      </Switch>
+    </Suspense>
+    )
+  }
 }
 
-export default App;
+export default connect(null,null)(App);
