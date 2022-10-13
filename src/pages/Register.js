@@ -7,6 +7,9 @@ import {validEmail,validPassword} from '../helper/Regex'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {IsNullOrEmpty} from '../helper/Common';
+import AlertDialog from '../component/dialog/AlertDialog';
+import * as alertAction from '../actions/Alert/AlertAction';
+import * as loginApiAction from '../actions/api/UserApiAction'
 
 class Register extends React.Component{
   constructor(props) {
@@ -85,7 +88,12 @@ class Register extends React.Component{
   registerOnClick = async() =>{
     try
     {
-       
+      const res = await this.props.LoginApiAction.Register(this.state.email,this.state.password,this.state.confirmPassword);
+      if(res?.data?.isError == true){
+        this.props.AlertAction.setAlert(2,res?.data?.errorMsg,true);
+        return;
+   }
+   alert("yes");
   }
   catch(ex){
     toast.error("เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
@@ -115,7 +123,12 @@ class Register extends React.Component{
     render(){
       
       return(
-               
+        <React.Fragment>    
+        <AlertDialog/>
+        <React.Fragment>
+        
+        <ToastContainer />  
+       
 
  <div className={this.state.width <= 998 ?"":"div-center div-bg-singup"} style={this.state.width <= 998 ?{}:{height:this.state.height}}>
 
@@ -153,7 +166,7 @@ class Register extends React.Component{
 
        {/*Log in Button*/}
       <div className="div-center">
-      <button className="primary-button" style={{marginTop:'20px'}}>Sing up</button>
+      <button className="primary-button" style={{marginTop:'20px'}} onClick={this.registerOnClick}>Sing up</button>
       </div>
 
    {/*Back Link*/}
@@ -165,6 +178,8 @@ class Register extends React.Component{
 </div>
 
 </div>
+</React.Fragment>  
+</React.Fragment>  
       );
     }
   }
@@ -172,7 +187,8 @@ class Register extends React.Component{
   });
   
   const mapDispatchToProps = dispatch =>({
-   
+    AlertAction : bindActionCreators(alertAction,dispatch),
+    LoginApiAction : bindActionCreators(loginApiAction,dispatch)
   });
   
   

@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {IsNullOrEmpty} from '../helper/Common';
 import AlertDialog from '../component/dialog/AlertDialog';
 import * as alertAction from '../actions/Alert/AlertAction';
-
+import * as loginApiAction from '../actions/api/UserApiAction'
 
 class LogIn extends React.Component{
   constructor(props) {
@@ -53,9 +53,14 @@ class LogIn extends React.Component{
         this.setState({loginErrorText:"อีเมล์หรือรหัสผ่านไม่ถูกต้อง"})
     }
     else{
-
+      const res = await this.props.LoginApiAction.Login(this.state.email,this.state.password);
+      if(res?.data?.isError == true){
+        this.props.AlertAction.setAlert(2,res?.data?.errorMsg,true);
+        return;
    }
+   alert("yes");
   }
+}
    catch(ex){
      toast.error("เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
    }
@@ -120,6 +125,7 @@ class LogIn extends React.Component{
   
   const mapDispatchToProps = dispatch =>({
     AlertAction : bindActionCreators(alertAction,dispatch),
+    LoginApiAction : bindActionCreators(loginApiAction,dispatch)
   });
   
   
