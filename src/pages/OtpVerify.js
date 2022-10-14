@@ -10,6 +10,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as userApiAction from '../actions/api/UserApiAction'
 import {IsNullOrEmpty} from '../helper/Common';
+import {TimeCounter} from '../component/timeCountdown/TimeCounter'
+
 
 class OTPVerify extends Component {
     constructor(props) {
@@ -18,7 +20,7 @@ class OTPVerify extends Component {
         { width: 0, 
           height: 0,
           otp:"",
-          otpLifeTime:0
+          targetDate:0
         };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
       }
@@ -32,6 +34,9 @@ class OTPVerify extends Component {
         window.removeEventListener('resize', this.updateWindowDimensions);
       }
       
+      componentDidUpdate(){
+        
+      }
       updateWindowDimensions() {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
       }
@@ -50,7 +55,12 @@ class OTPVerify extends Component {
         toast.error(res?.data?.errorMsg);
         return;
         }
-        await this.setState({otpLifeTime:res?.data?.otpLifeTime});
+        const THREE_DAYS_IN_MS = res?.data?.otpLifeTime * 60 * 1000;
+        const NOW_IN_MS = new Date().getTime();
+      
+        const targetDate = NOW_IN_MS + THREE_DAYS_IN_MS;
+
+        await this.setState({targetDate:targetDate});
         }
         catch(ex){
             toast.error("เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
@@ -89,7 +99,7 @@ class OTPVerify extends Component {
         if((this.state.otp).length == 6){
         await this.checkOTP();
         }
-      }    
+      }  
 
   render() {
     return (
@@ -123,9 +133,10 @@ class OTPVerify extends Component {
       />
      
       {/*Didn't receive a OTP? Title Text*/}
-       <div className="text-title-yellow3" style={{marginTop:'10px',textAlign:'center'}}>Didn't receive a OTP?
-       <a className="text-title-yellow3" style={{textDecoration: 'underline'}}  onClick={this.requestOTP}> Request OTP</a></div>
-      
+       <div className="text-title-yellow3" style={{marginTop:'10px',display:'flex',justifyContent: 'center'}}>Didn't receive a OTP?
+       <span><TimeCounter targetDate={this.state.targetDate} onClick={this.requestOTP}/></span>
+ </div>
+
       </div>
       </div>
       </div>

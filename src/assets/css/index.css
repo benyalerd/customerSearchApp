@@ -79,3 +79,24 @@
     border-radius: 5px;
     height: 30px;
 }
+
+.show-counter .countdown {
+    line-height: 1.25rem;
+    padding-left: 10px;
+
+  }
+
+  .show-counter .countdown > span {
+    padding-left: 5px;
+  }
+
+  
+  .show-counter .countdown > span {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .show-counter {
+    display: flex;
+  }
