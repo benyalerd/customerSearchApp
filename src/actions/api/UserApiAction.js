@@ -40,3 +40,42 @@ export  const  Register = (email,password,repeatPassword)=> async (dispatch)=>{
         throw error;
     }
 }
+
+export  const  RequestOTP = (userId)=> async (dispatch)=>{
+    try
+    {
+    const apiEndpoint = "/api/users/sendOTP";
+    const request = JSON.stringify({
+        "userId":userId,
+    });    
+        const data = axios.post(apiEndpoint,request,{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+        return data;
+    }
+    catch(error){
+        throw error;
+    }
+}
+
+export  const  CheckOTP = (userId,otp)=> async (dispatch)=>{
+    try
+    {
+    const apiEndpoint = "/api/users/checkOTP";
+    const request = JSON.stringify({
+        "userId":userId,
+        "otp":otp
+    });    
+        const data = axios.post(apiEndpoint,request,{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+        return data;
+    }
+    catch(error){
+        throw error;
+    }
+}

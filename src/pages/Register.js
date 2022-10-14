@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {IsNullOrEmpty} from '../helper/Common';
 import AlertDialog from '../component/dialog/AlertDialog';
 import * as alertAction from '../actions/Alert/AlertAction';
-import * as loginApiAction from '../actions/api/UserApiAction'
+import * as userApiAction from '../actions/api/UserApiAction'
 
 class Register extends React.Component{
   constructor(props) {
@@ -88,12 +88,13 @@ class Register extends React.Component{
   registerOnClick = async() =>{
     try
     {
-      const res = await this.props.LoginApiAction.Register(this.state.email,this.state.password,this.state.confirmPassword);
+      const res = await this.props.UserApiAction.Register(this.state.email,this.state.password,this.state.confirmPassword);
       if(res?.data?.isError == true){
         this.props.AlertAction.setAlert(2,res?.data?.errorMsg,true);
         return;
    }
-   alert("yes");
+   this.props.history.push('/Login');
+  
   }
   catch(ex){
     toast.error("เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
@@ -188,7 +189,7 @@ class Register extends React.Component{
   
   const mapDispatchToProps = dispatch =>({
     AlertAction : bindActionCreators(alertAction,dispatch),
-    LoginApiAction : bindActionCreators(loginApiAction,dispatch)
+    UserApiAction : bindActionCreators(userApiAction,dispatch)
   });
   
   

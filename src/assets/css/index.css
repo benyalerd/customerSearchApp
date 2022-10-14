@@ -26,6 +26,17 @@
     color:#e6bd6f;
 }
 
+.text-title-yellow2{
+    font-size: 22px;
+    font-weight: 900;
+    color:#e6bd6f;
+}
+
+
+.text-title-yellow3{
+    font-size: 14px;
+    color:#e6bd6f;
+}
 .input{
     border-radius: 25px;
     box-shadow: 0 0 5pt 0.5pt #d3d3d3;
@@ -51,4 +62,20 @@
     height: 45px;
     border-radius: 30px;
     cursor:pointer;
+}
+.div-otp{
+    background-color:#e8e7e3;
+    width:400px;
+    height:100%;
+    border-radius: 20px;
+    padding: 30px 30px;
+}
+.otpVerifyContainer{
+    justify-content: center;
+}
+
+.otpVerifyInput{
+    width: 2em !important;
+    border-radius: 5px;
+    height: 30px;
 }

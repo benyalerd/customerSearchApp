@@ -10,6 +10,8 @@ import {IsNullOrEmpty} from '../helper/Common';
 import AlertDialog from '../component/dialog/AlertDialog';
 import * as alertAction from '../actions/Alert/AlertAction';
 import * as loginApiAction from '../actions/api/UserApiAction'
+import $ from 'jquery';
+import queryString from 'query-string';
 
 class LogIn extends React.Component{
   constructor(props) {
@@ -58,7 +60,11 @@ class LogIn extends React.Component{
         this.props.AlertAction.setAlert(2,res?.data?.errorMsg,true);
         return;
    }
-   alert("yes");
+   await this.props.history.push({
+    pathname: '/OTPVerify',
+    search: `?userId=${res?.data?.userId}`,
+   });
+   
   }
 }
    catch(ex){
