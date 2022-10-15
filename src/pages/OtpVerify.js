@@ -88,6 +88,10 @@ class OTPVerify extends Component {
             await this.setState({otp:""});
             return;
         }
+        this.props.history.push({
+          pathname: '/Customer',
+          search: `?userId=${query.userId}`,
+         });
         }
         catch(ex){
             toast.error("เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่");

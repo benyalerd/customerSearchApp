@@ -63,6 +63,18 @@
     border-radius: 30px;
     cursor:pointer;
 }
+
+.primary-button2{
+  background-color:#cc4d76;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 900;
+  color:#e6bd6f;
+  width: 100px;
+  height: 45px;
+  border-radius: 15px;
+  cursor:pointer;
+}
 .div-otp{
     background-color:#e8e7e3;
     width:400px;
@@ -100,3 +112,37 @@
   .show-counter {
     display: flex;
   }
+
+  .pagination-ul{
+    justify-content: end;
+  }
+  
+  .pagination-li{
+    font-size: 18px;
+      padding: 0px 10px;
+      border: 1px solid gray;
+  }
+  
+  .pagination-li-active{
+    font-size: 18px;
+      padding: 0px 10px;
+      border: 1px solid gray;
+      background-color: #cc4d76;
+      color: white;
+  }
+  
+  .pagination-li-first{
+    font-size: 18px;
+      padding: 0px 10px;
+      border: 1px solid gray;
+      border-radius: 5px 0px 0px 5px;
+  }
+  
+  .pagination-li-last{
+    font-size: 18px;
+      padding: 0px 10px;
+      border: 1px solid gray;
+      border-radius: 0px 5px 5px 0px;
+  }
+
+  
