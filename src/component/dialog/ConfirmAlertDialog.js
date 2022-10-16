@@ -101,8 +101,8 @@ class ConfirmAlertDialog extends React.Component {
                                         </div>
                                         <div className="form-group" style={{padding:'40px 0px',display:'flex',justifyContent:'center',margin:'0px 15px'}}>
      
-     <button  className="primary-button" style={{marginRight:'10px'}} onClick={this.onSubmit}>OK</button>
-     <button  className="secondary-button" onClick={this.handleClose} style={{border:'1px solid #4f6137'}}>Cancel</button>
+     <button  className="primary-button2" style={{marginRight:'10px',width:'150px'}} onClick={this.onSubmit}>OK</button>
+     <button  className="secondary-button2" onClick={this.handleClose} style={{width:'150px'}}>Cancel</button>
     
    </div>
    

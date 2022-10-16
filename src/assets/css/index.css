@@ -145,4 +145,36 @@
       border-radius: 0px 5px 5px 0px;
   }
 
-  
+  .table-head{
+    color:#e6bd6f;
+    background-color:#cc4d76 !important;
+    text-align: center;
+  }
+  .table-th{
+    border: #d3d3d3 2px solid;
+    padding: 5px;
+  }
+
+  .table-body{
+    text-align: center;
+  }
+
+  .table-td{
+    text-align: center;
+    padding: 5px;
+  }
+.row tr:nth-child(even) {background-color: White}
+.row tr:nth-child(odd) {background-color: #e8e7e3}
+
+.secondary-button2{
+  background-color:white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 900;
+  color:#e6bd6f;
+  width: 100px;
+  height: 45px;
+  border-radius: 15px;
+  cursor:pointer;
+  border: 1px solid #e6bd6f !important;
+}
