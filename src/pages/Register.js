@@ -167,7 +167,7 @@ class Register extends React.Component{
 
        {/*Log in Button*/}
       <div className="div-center">
-      <button className="primary-button" style={{marginTop:'20px'}} onClick={this.registerOnClick}>Sing up</button>
+      <button  className={!this.state.IsRegisterDisable?"primary-button":"primary-button disabled"} style={{marginTop:'20px'}}  onClick={this.registerOnClick}>Sing up</button>
       </div>
 
    {/*Back Link*/}

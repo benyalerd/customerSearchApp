@@ -13,6 +13,8 @@ import {IsNullOrEmpty} from '../helper/Common';
 import AlertDialog from '../component/dialog/AlertDialog';
 import * as alertAction from '../actions/Alert/AlertAction';
 import ConfirmAlertDialog from '../component/dialog/ConfirmAlertDialog';
+import * as customerAction from '../actions/Customer/CustomerAction';
+import CustomerDialog from '../component/dialog/CustomerDialog';
 
 class Customer extends Component {
     constructor(props) {
@@ -41,11 +43,27 @@ class Customer extends Component {
         window.removeEventListener('resize', this.updateWindowDimensions);
       }
       
-      componentDidUpdate(){
-        
+      componentDidUpdate(prevProps, prevState){
+      
+        if(prevProps.Customer.AlertOpen != this.props.Customer.AlertOpen)
+        {
+          if(this.state.customerLists?.length > 0)
+          {
+          this.searchCustomer();
+          }
+        }
       }
       updateWindowDimensions() {
         this.setState({ width: window.innerWidth, height: window.innerHeight });
+      }
+
+      addCustomerDialogOnclick = async () =>{
+        await this.props.CustomerAction.setCustomerAlert([],true,false);
+      }
+
+      updateCustomerDialogOnclick = async (index) =>{
+        var customerSelect = this.state.customerLists[index];
+        await this.props.CustomerAction.setCustomerAlert(customerSelect,true,true);
       }
 
       onChangeCustName = (e) =>{
@@ -92,15 +110,12 @@ class Customer extends Component {
        }
         this.setState({totalRecord:res?.data?.totalRecord,customerLists:res?.data?.customerList})     
       }
-
-
       catch(ex){
         toast.error("เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
         }
       }
 
       deleteCustomer = async(customerId)=> {
-        alert(customerId);
         try{
           await this.setState({selectCustId:customerId});
           await this.props.AlertAction.setConfirmAlert('ลบ Customer',this.deleteCustomerApi.bind(this),true);
@@ -129,6 +144,7 @@ class Customer extends Component {
       <React.Fragment>    
       <AlertDialog/>
       <ConfirmAlertDialog/>
+      <CustomerDialog/>
       <React.Fragment>
       
       <ToastContainer />  
@@ -137,7 +153,7 @@ class Customer extends Component {
        {/*Customer Information + Button create new*/}
        <div className="form-group row">
         <div className="form-group col-8 text-title-yellow2">Customer Information</div>
-        <div className="form-group col-4" style={{textAlign: 'end'}}> <button className="primary-button2" >CREATE NEW</button></div>
+        <div className="form-group col-4" style={{textAlign: 'end'}}> <button className="primary-button2" onClick={this.addCustomerDialogOnclick}>CREATE NEW</button></div>
         </div>
 
         <div style={{ backgroundColor:'white',borderRadius:'10px',width:'100%',marginTop:'20px',padding:'0px 10px'}}>
@@ -235,7 +251,7 @@ class Customer extends Component {
               <td className="table-td">{telephone}</td>
               <td> 
                 <div style={{justifyContent: 'center',display: 'flex'}}>
-                <img src={require('../assets/images/edit_icon.png').default}  style={{display :'unset',width:'25px',marginRight:'5px',height:' fit-content',cursor:'pointer'}} />
+                <img src={require('../assets/images/edit_icon.png').default}  style={{display :'unset',width:'25px',marginRight:'5px',height:' fit-content',cursor:'pointer'}} onClick={() => this.updateCustomerDialogOnclick(index)}/>
                 <img src={require('../assets/images/delete_icon.png').default}  style={{display :'unset',width:'25px',marginRight:'5px',height:' fit-content',cursor:'pointer'}} onClick={() => this.deleteCustomer(customerId)}/>
               </div>
               </td>
@@ -259,11 +275,13 @@ class Customer extends Component {
 }
 
 const mapStateToProps = state =>({
+  Customer:state.Customer
 });
 
 const mapDispatchToProps = dispatch =>({
   AlertAction : bindActionCreators(alertAction,dispatch),
-  CustomerApiAction : bindActionCreators(customerApiAction,dispatch)
+  CustomerApiAction : bindActionCreators(customerApiAction,dispatch),
+  CustomerAction : bindActionCreators(customerAction,dispatch)
 });
 
 

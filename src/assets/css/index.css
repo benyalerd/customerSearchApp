@@ -178,3 +178,9 @@
   cursor:pointer;
   border: 1px solid #e6bd6f !important;
 }
+
+.disabled{
+  cursor: none;
+  color: white;
+  background-color: lightgrey;
+}
