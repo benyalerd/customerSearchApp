@@ -115,6 +115,50 @@ class Customer extends Component {
         }
       }
 
+      exportExcel = async() =>{
+        try
+        {
+          const query = queryString.parse(this.props.location.search);
+          var request = JSON.stringify({
+            name:this.state.customerNameSearch,
+            citizenId:this.state.citizenIdSearch,
+            email:this.state.emailSearch,
+            telephone:this.state.telSearch,
+            userId:query.userId,          
+          });
+          const res = await this.props.CustomerApiAction.ExportExcel(request);
+          if(res?.data?.isError == true){
+            this.props.AlertAction.setAlert(2,res?.data?.errorMsg,true);
+            return;
+       }
+      }
+      catch(ex){
+        toast.error("เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
+        }
+      }
+
+      sendAttachmentFile = async() =>{
+        try
+        {
+          const query = queryString.parse(this.props.location.search);
+          var request = JSON.stringify({
+            name:this.state.customerNameSearch,
+            citizenId:this.state.citizenIdSearch,
+            email:this.state.emailSearch,
+            telephone:this.state.telSearch,
+            userId:query.userId,          
+          });
+          const res = await this.props.CustomerApiAction.SendAttachmentFile(request);
+          if(res?.data?.isError == true){
+            this.props.AlertAction.setAlert(2,res?.data?.errorMsg,true);
+            return;
+       }
+      }
+      catch(ex){
+        toast.error("เกิดข้อผิดพลาด กรุณาติดต่อเจ้าหน้าที่");
+        }
+      }
+
       deleteCustomer = async(customerId)=> {
         try{
           await this.setState({selectCustId:customerId});
@@ -194,8 +238,8 @@ class Customer extends Component {
         {/*Export Excel / Attachment File*/}
         {this.state.totalRecord > 0?
         <div className="form-group col-9" style={{display:'flex',justifyContent: 'start', alignItems: 'center'}}>
-        <img src={require('../assets/images/excel_logo.png').default}  style={{display :'unset',width:'35px',marginRight:'5px',height:' fit-content',cursor:'pointer'}}/>
-        <img src={require('../assets/images/attachment_logo.png').default}  style={{display :'unset',width:'35px',height:' fit-content',cursor:'pointer'}}/>
+        <img src={require('../assets/images/excel_logo.png').default}  style={{display :'unset',width:'35px',marginRight:'5px',height:' fit-content',cursor:'pointer'}} onClick={this.exportExcel}/>
+        <img src={require('../assets/images/attachment_logo.png').default}  style={{display :'unset',width:'35px',height:' fit-content',cursor:'pointer'}} onClick={this.sendAttachmentFile}/>
         </div>
   :null}
         {/*Pagination*/}

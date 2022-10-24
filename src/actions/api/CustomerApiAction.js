@@ -62,3 +62,35 @@ export  const  UpdateCustomer = (customerId,request)=> async (dispatch)=>{
         throw error;
     }
 }
+
+export  const  ExportExcel = (request)=> async (dispatch)=>{
+    try
+    {
+    const apiEndpoint = "/api/customer/export/excel";
+        const data = axios.get(apiEndpoint,{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+        return data;
+    }
+    catch(error){
+        throw error;
+    }
+}
+
+export  const  SendAttachmentFile = (request)=> async (dispatch)=>{
+    try
+    {
+    const apiEndpoint = "/api/customer/attachment/customerinfo";
+        const data = axios.post(apiEndpoint,request,{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+        return data;
+    }
+    catch(error){
+        throw error;
+    }
+}
