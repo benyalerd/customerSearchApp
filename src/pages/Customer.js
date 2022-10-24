@@ -62,7 +62,7 @@ class Customer extends Component {
       }
 
       updateCustomerDialogOnclick = async (index) =>{
-        var customerSelect = this.state.customerLists[index];
+        var customerSelect = this.state.customerLists[index];      
         await this.props.CustomerAction.setCustomerAlert(customerSelect,true,true);
       }
 

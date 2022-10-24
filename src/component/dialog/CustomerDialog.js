@@ -16,6 +16,8 @@ import {IsNullOrEmpty,validCitizenID} from '../../helper/Common';
 import * as customerApiAction from '../../actions/api/CustomerApiAction'
 import $ from 'jquery';
 import queryString from 'query-string';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class CustomerDialog extends React.Component {
     constructor(props) {
@@ -46,7 +48,8 @@ class CustomerDialog extends React.Component {
 
     async componentDidMount() {
         const selectCustomer = this.props.Customer.CustomerSelect;
-        this.setState({ custName:selectCustomer?.customerName,custLastName:selectCustomer?.customerLastname,citizenId:selectCustomer?.citizenId,birthDate:new Date(),email: selectCustomer?.email,tel:selectCustomer?.telephone,custId:selectCustomer?.customerId});
+        const birthDate = selectCustomer?.birthDate?new Date(selectCustomer?.birthDate):""
+        this.setState({ custName:selectCustomer?.customerName,custLastName:selectCustomer?.customerLastname,citizenId:selectCustomer?.citizenId,birthDate:birthDate,email: selectCustomer?.email,tel:selectCustomer?.telephone,custId:selectCustomer?.customerId});
        
     }
 
@@ -55,7 +58,8 @@ class CustomerDialog extends React.Component {
      if(prevProps.Customer.AlertOpen != this.props.Customer.AlertOpen)
      {
         const selectCustomer = this.props.Customer.CustomerSelect;
-        this.setState({ custName:selectCustomer?.customerName,custLastName:selectCustomer?.customerLastname,citizenId:selectCustomer?.citizenId,birthDate:new Date(),email: selectCustomer?.email,tel:selectCustomer?.telephone,custId:selectCustomer?.customerId});
+        const birthDate = selectCustomer?.birthDate? new Date(selectCustomer?.birthDate):""
+        this.setState({ custName:selectCustomer?.customerName,custLastName:selectCustomer?.customerLastname,citizenId:selectCustomer?.citizenId,birthDate:birthDate,email: selectCustomer?.email,tel:selectCustomer?.telephone,custId:selectCustomer?.customerId});
        
     }
     }
@@ -126,7 +130,18 @@ class CustomerDialog extends React.Component {
         var isDisable = this.CheckDisableSubmitButton();
         this.setState({IsSubmitDisable:isDisable});
     }
-
+    handleDateChange = async(e) =>{
+      
+        var value = e
+        if(IsNullOrEmpty(value)){
+            await this.setState({birthDate:value,errorBirthDate:'กรุณาเลือกวันเกิด'});
+        }
+        else{
+            await this.setState({birthDate:value,errorBirthDate:''});
+          }
+        var isDisable = this.CheckDisableSubmitButton();
+        this.setState({IsSubmitDisable:isDisable});
+    }
     CheckDisableSubmitButton = () =>{
         if(!IsNullOrEmpty(this.state.errorCustName)|| IsNullOrEmpty(this.state.custName))
         {
@@ -268,8 +283,14 @@ class CustomerDialog extends React.Component {
      </div>
 
 {/*Birth Date*/}
-
-
+<div class="form-control input" style={{padding:'0px'}}>
+<DatePicker
+  selected={this.state.birthDate}
+  onChange={this.handleDateChange} 
+  maxDate={new Date()}
+  placeholderText="Select Birth Date"
+/>
+</div>
 {/*Email Input*/}
 <input  type="text" class="form-control input"  id="InputEmail" placeholder="e-mail" value={this.state.email} onChange={this.validateEmail.bind(this)}/>
  {/*Error Email Text*/}
