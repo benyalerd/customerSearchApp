@@ -192,7 +192,130 @@ class Customer extends Component {
       <React.Fragment>
       
       <ToastContainer />  
+      {this.state.width <= 998 ?
+      <div style={{ backgroundColor:'#e8e7e3',width:'100%',padding:'15px',height:this.state.height}}>
+      
+      {/*Customer Information*/}
+      <div className="form-group row">
+        <div className="form-group text-title-yellow2">Customer Information</div>
+        </div>
+              
+      <div style={{ backgroundColor:'white',borderRadius:'10px',width:'100%',marginTop:'20px',padding:'0px 10px'}}>
+      {/*Customer Name Search*/}
+      <div className="form-group row">
+        <div className="form-group">
+        <input  type="text" class="form-control input-mobile" style={{borderRadius:'10px'}}  id="InputCustNameSearch" placeholder="customer name" value={this.state.customerNameSearch} onChange={this.onChangeCustName}/>     
+        </div>
+        </div>
 
+        <div className="form-group row">
+            {/*Citizen Id Search*/}
+        <div className="form-group col-6 ">
+        <input  type="text" class="form-control input-mobile" style={{borderRadius:'10px',marginTop:'0px'}}  id="InputCitizenIdSearch" placeholder="citizen id" value={this.state.citizenIdSearch} onChange={this.onChangeCitizenID}/>     
+        </div>
+
+        {/*Tel Search*/}
+        <div className="form-group col-6 ">
+        <input  type="text" class="form-control input-mobile" style={{borderRadius:'10px',marginTop:'0px'}}  id="InputTelSearch" placeholder="tel." value={this.state.telSearch} onChange={this.onChangeTel}/>     
+        </div>
+</div>
+
+<div className="form-group row">
+
+            {/*Email Search*/}
+        <div className="form-group col-8">
+        <input  type="text" class="form-control input-mobile" style={{borderRadius:'10px',marginTop:'0px'}}  id="InputEmailSearch" placeholder="e-mail" value={this.state.emailSearch} onChange={this.onChangeEmail}/>             
+        </div>
+
+  {/*Button Search*/}
+  <div className="form-group col-3" style={{textAlign: 'end'}}> <button style={{height: '30px',borderRadius: '10px'}} className="primary-button2" onClick={this.searchCustomer}>SEARCH</button></div>
+
+
+      
+</div>
+
+<div className="form-group row">
+
+            {/*CREATE NEW Button*/}
+        <div className="form-group col-4" style={{textAlign: 'start',display: 'flex',alignItems: 'center'}}> <button style={{height: '30px',borderRadius: '10px'}} className="primary-button2" onClick={this.addCustomerDialogOnclick}>CREATE NEW</button></div>
+            {/*Export Excel / Attachment File*/}
+        {this.state.totalRecord > 0?
+        <div className="form-group col-3" style={{display:'flex',justifyContent: 'start', alignItems: 'center'}}>
+        <img src={require('../assets/images/excel_logo.png').default}  style={{display :'unset',width:'35px',marginRight:'5px',height:' fit-content',cursor:'pointer'}} onClick={this.exportExcel}/>
+        <img src={require('../assets/images/attachment_logo.png').default}  style={{display :'unset',width:'35px',height:' fit-content',cursor:'pointer'}} onClick={this.sendAttachmentFile}/>
+        </div>
+  :null}
+
+   {/*Pagination*/}
+   <div className="form-group col-5 ">
+        {this.state.totalRecord > 0 ?
+<div className="form-group row"  style={{padding: '10px 30px 10px 30px'}}>
+<Pagination
+          innerClass="pagination pagination-ul"
+          itemClass="pagination-li"
+          itemClassFirst="pagination-li-first"
+          activeClass="pagination-li-active"
+          itemClassLast="pagination-li-last"
+          hideDisabled={true}
+          activePage={this.state.activePage+1}
+          itemsCountPerPage={this.state.limit}
+          totalItemsCount={this.state.totalRecord}
+          onChange={this.searchCustomer}
+        />
+  </div> : null
+    }
+     </div>
+          </div>
+          <div className="form-group row" style={{padding:'2px'}}>
+          <React.Fragment>
+        {this.state.customerLists?.map(( 
+            {
+                customerName,
+                customerLastname,
+                citizenId,
+                birthDate,
+                email,
+                telephone,
+                customerId
+            }, index ) => ( 
+              <React.Fragment>    
+                <div style={{backgroundColor:'white',padding:'10px 15px'}}>
+         <div style={{backgroundColor:'#cc4d76',borderRadius:'10px',padding: '5px 15px'}}>
+         <div className="form-group row">       
+        <div style={{ fontSize: '20px',fontWeight: '700',color:'white'}}>{customerName} {customerLastname}</div>            
+        </div>
+
+        <div className="form-group row">
+
+        <div style={{ fontSize: '16px',color:'white'}} className="col-6">
+        <img src={require('../assets/images/citizen_Icon.png').default}  style={{display :'unset',width:'20px',height:' fit-content',cursor:'pointer'}}/>
+         <span>{citizenId}</span>
+          </div>     
+        <div style={{ fontSize: '16px',color:'white'}} className="col-6">
+        <img src={require('../assets/images/telephoneIcon.png').default}  style={{display :'unset',width:'20px',height:' fit-content',cursor:'pointer'}}/>
+         <span>{telephone}</span>
+         </div>     
+        </div>
+
+        <div className="form-group row">       
+        <div style={{ fontSize: '16px',color:'white'}} className="col-10">
+        <img src={require('../assets/images/email_Icon.png').default}  style={{display :'unset',width:'20px',height:' fit-content',cursor:'pointer'}}/>
+         <span>{email}</span>
+         </div>   
+        <div style={{justifyContent: 'center',display: 'flex'}} className="col-2">
+                <img src={require('../assets/images/edit_mobile.png').default}  style={{display :'unset',width:'25px',marginRight:'5px',height:' fit-content',cursor:'pointer'}} onClick={() => this.updateCustomerDialogOnclick(index)}/>
+                <img src={require('../assets/images/delete_mobile.png').default}  style={{display :'unset',width:'25px',marginRight:'5px',height:' fit-content',cursor:'pointer'}} onClick={() => this.deleteCustomer(customerId)}/>
+              </div>         
+        </div>
+</div>
+</div>
+              </React.Fragment>       
+        ))}
+         </React.Fragment>
+        </div>
+        </div>
+      </div>
+      : 
        <div style={{ backgroundColor:'#e8e7e3',width:'100%',padding:'15px',height:this.state.height}}>
        {/*Customer Information + Button create new*/}
        <div className="form-group row">
@@ -312,8 +435,10 @@ class Customer extends Component {
             </div>
 
         </div>     
+  }
       </React.Fragment>
       </React.Fragment>
+            
     );
   }
 }

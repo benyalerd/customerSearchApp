@@ -45,6 +45,14 @@
     padding:20px;
 }
 
+.input-mobile{
+  border-radius: 25px;
+  box-shadow: 0 0 5pt 0.5pt #d3d3d3;
+  margin: 20px 0px;
+  height: 30px;
+  padding:15px;
+}
+
 .text-error{
   color: red;
   text-align: center;
