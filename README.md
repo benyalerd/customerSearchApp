@@ -26,3 +26,14 @@ show error message text when email or password is incorrect.
 show pop up error message when register is unsuccess (from service)
 #
 ![3](https://user-images.githubusercontent.com/62868362/195832896-e10cb938-2018-4286-9bd1-737eff299065.png)
+
+customer search page - mobile size and website size respectively
+#
+![Screenshot_20221030_092046](https://user-images.githubusercontent.com/62868362/198885156-81c647d2-4390-48ff-84a4-bce3edd791ad.png)
+![Screenshot_20221030_092355](https://user-images.githubusercontent.com/62868362/198885159-9b31922b-e088-4aac-a068-cfec64a93f49.png)
+![Screenshot_20221030_092418](https://user-images.githubusercontent.com/62868362/198885163-69c070fb-7979-4498-aeae-4c253c482f47.png)
+
+![Screenshot (16)](https://user-images.githubusercontent.com/62868362/198885177-39bb80e1-7368-4a8c-bdb5-f8967cefea4a.png)
+![Screenshot (17)](https://user-images.githubusercontent.com/62868362/198885179-02e0f1b9-1559-4e62-8b14-a36970cf58bb.png)
+![Screenshot (18)](https://user-images.githubusercontent.com/62868362/198885186-415de6af-3fb9-40b4-b855-088a1d20b944.png)
+
